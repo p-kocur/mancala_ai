@@ -53,7 +53,12 @@ class TestNN(unittest.TestCase):
         net2 = torch.load("model/model_test.pth", weights_only=False)
         self.assertTrue(str(net2.state_dict()) == str(net.state_dict()))
         
-        
+    def test_is_softmax(self):
+        env = gym.make("Mancala-v0").unwrapped
+        env.reset()
+        net = nets.NeuralNetwork()
+        p, v = net(env.state()[1])
+        self.assertEqual(p.sum(), 1)
     
     
 if __name__ == "__main__":

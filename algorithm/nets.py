@@ -16,15 +16,17 @@ class NeuralNetwork(nn.Module):
     def __init__(self):
         super().__init__()
         self.cnn = nn.Sequential(
-            nn.Conv2d(1, 200, kernel_size=(1, 1)),
+            nn.Conv2d(1, 64, kernel_size=(1, 1)),
             nn.ELU(),
-            nn.Conv2d(200, 1, kernel_size=(2, 1)),
+            nn.Conv2d(64, 1, kernel_size=(2, 1)),
             nn.ELU(),
             nn.Flatten(),
             nn.Linear(6, 128)
         )
         self.simple_nn = nn.Linear(2, 2)
-        self.classifier_p = nn.Linear(128 + 2, 6)
+        self.classifier_p = nn.Sequential(
+            nn.Linear(128 + 2, 6),
+            nn.Softmax(dim=1))
         self.classifier_v = nn.Linear(128 + 2, 1)
         
     def forward(self, s):
