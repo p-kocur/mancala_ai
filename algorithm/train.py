@@ -10,21 +10,25 @@ import library.enviroment
 import time
 import warnings
 
-def train_loop(n_iterations=17, n_games=500, tau=0.5):
+def train_loop(n_iterations=10, n_games=500, tau=0.5):
     old_network = NeuralNetwork()
     network = NeuralNetwork()
     old_network.load_state_dict(network.state_dict())
-    optimizer = torch.optim.Adagrad(network.parameters())
+    optimizer = torch.optim.Adagrad(network.parameters(), weight_decay=0.01)
+    bench_list = []
     
     for i in range(n_iterations):
         print(f"Iteracja: {i}")
+        if i % 2 == 0:
+                bench_list.append(clash_benchmark(network))
+                print(f"bbbbbbbb: {bench_list[-1]}")
         print("Gra:")
+              
         for j in range(n_games):
             print(f"{j}")
-            t = time.time()
+            #t = time.time()
             experience = play(network, old_network, j%2)
-            print(time.time()-t)
-            print(clash_benchmark(network))
+            #print(time.time()-t)
             s, z, pi = experience
             optimizer.zero_grad()
             p, v = network(s)
@@ -39,16 +43,16 @@ def train_loop(n_iterations=17, n_games=500, tau=0.5):
             #    old_network.load_state_dict(old_network.state_dict())
             #    break
             old_network.load_state_dict(old_network.state_dict())
-            
-            
+        
+    print(bench_list)
     torch.save(network.state_dict(), "model/model.pth")
     
 def return_move(net, env, s, random_v=False):
-    Ns = np.array(selection(s, net, env))
+    Ns = selection(s, net, env)
     with warnings.catch_warnings(record=True) as caught_warnings:
         warnings.simplefilter("always") 
         Ns = Ns / Ns.sum()
-        if caught_warnings:
+        if caught_warnings:  
             for warning in caught_warnings:
                 print(f"{Ns}")
         
