@@ -1,6 +1,6 @@
 # Mancala AI Agent inspirowany AlphaZero
 
-To repozytorium zawiera implementację wstępnego modelu agenta AI do gry Mancala, inspirowanego algorytmem AlphaZero. Celem projektu jest stworzenie efektywnego i samouczącego się agenta, który może rywalizować na wysokim poziomie w grze Mancala.
+To repozytorium zawiera implementację wstępnego modelu agenta AI do gry Mancala, inspirowanego algorytmem AlphaZero. Celem projektu jest stworzenie efektywnego i samouczącego się agenta, który może rywalizować na ze średnio-zaawansowanymi graczami w Mancala.
 
 ## Status projektu
 
