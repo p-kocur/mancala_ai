@@ -10,5 +10,9 @@ Projekt potrzbuje usprawnień w kierunku optymalizacji złożoności algorytmu. 
 - Implementację mechanizmów inspirowanych AlphaZero, takich jak Monte Carlo Tree Search (MCTS) oraz sieci neuronowe.
 - Funkcje do uczenia agenta przez samodzielną grę.
 
+## Dodatkowe informacje
+
+Najważniejsze elementy programu znajdują się w folderze `algorithm/`. Znajdują się tam implementacje MCTS, sieci neuronowych, struktury procesu uczenia, itd.
+
 ## Autor
 Paweł Kocur
